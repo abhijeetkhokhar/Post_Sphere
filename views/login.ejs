@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,6 +14,32 @@
             <input class="px-3 py-2 rounded-md bg-transparent border-2 border-zinc-800 outline-none" type="password" placeholder="password" name="password">
             <input class="px-5 py-2 rounded-md bg-blue-500" type="submit" value="Login">
         </form>
+    </div>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full h-screen bg-zinc-900 text-white flex items-center justify-center">
+        <div class="max-w-md w-full p-8 bg-zinc-800 rounded-lg shadow-lg">
+            <h2 class="text-3xl mb-6 text-center font-semibold">Login to Your Account</h2>
+            <form action="/login" method="post" class="space-y-4">
+                <input class="block w-full px-4 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" 
+                    type="email" placeholder="Email" name="email">
+                <input class="block w-full px-4 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" 
+                    type="password" placeholder="Password" name="password">
+                <input class="block w-full px-5 py-2 rounded-md bg-blue-500 hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer" 
+                    type="submit" value="Login">
+            </form>
+        </div>
     </div>
 </body>
 </html>

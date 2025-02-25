@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -17,6 +17,31 @@
             <input class="px-3 py-2 rounded-md bg-transparent border-2 border-zinc-800 outline-none" type="number" placeholder="age" name="age">
             <input class="px-5 py-2 rounded-md bg-blue-500" type="submit" value="Create Account">
         </form>
+    </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="w-full h-screen bg-zinc-900 text-white flex items-center justify-center">
+        <div class="max-w-md w-full p-8 bg-zinc-800 rounded-lg shadow-md">
+            <h2 class="text-3xl mb-6 text-center">Create Account</h2>
+            <form action="/register" method="post" class="space-y-4">
+                <input class="block w-full px-3 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Name" name="name">
+                <input class="block w-full px-3 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" type="text" placeholder="Username" name="username">
+                <input class="block w-full px-3 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" type="email" placeholder="Email" name="email">
+                <input class="block w-full px-3 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" type="password" placeholder="Password" name="password">
+                <input class="block w-full px-3 py-2 rounded-md bg-transparent border-2 border-zinc-700 outline-none focus:ring-2 focus:ring-blue-500" type="number" placeholder="Age" name="age">
+                <input class="block w-full px-5 py-2 rounded-md bg-blue-500 hover:bg-blue-600 transition duration-300 ease-in-out cursor-pointer" type="submit" value="Create Account">
+            </form>
+        </div>
     </div>
 </body>
 </html>

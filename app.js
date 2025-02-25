@@ -12,7 +12,7 @@ const jwt = require("jsonwebtoken");
 const userModel = require("../backendProject/models/user");
 const postModel = require("../backendProject/models/post");
 
-app.get("/", (req, res) => {
+app.get("/register", (req, res) => {
   res.render("app");
 });
 
@@ -29,6 +29,7 @@ app.get("/profile", isLoggedIn, (req, res) => {
   console.log(req.user);
   res.send("profile page");
 });
+
 
 app.post("/register", async (req, res) => {
   let { username, name, age, email, password } = req.body;
@@ -68,7 +69,7 @@ app.post("/login", async (req, res) => {
 
 
 function isLoggedIn (req, res, next) {
-  if (req.cookie.token == " ") res.send("u must be logged in");
+if (req.cookie.token == " ") res.send("u must be logged in");
   else {
     let data = jwt.verify(req.cookie.token, "shhhh");
     req.user = data;
@@ -77,5 +78,5 @@ function isLoggedIn (req, res, next) {
 };
 
 app.listen(3000, () => {
-  console.log("Server running on http//:localhost:3000");
+  console.log(3000, "Server running on localhost:3000");
 });
