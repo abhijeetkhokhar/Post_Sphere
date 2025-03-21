@@ -2,12 +2,12 @@
 ### Post_Sphere is a secure login and user authentication system built with Node.js and Express.js. It features password hashing (bcrypt), JWT-based session management, and MongoDB integration to securely store user credentials. Users can log in, access their profile, and post their thoughts.
 
 # Features
-✅ User Authentication – Secure login and registration
-✅ Password Hashing – Uses bcrypt for security
-✅ JWT Session Management – Secure user sessions
-✅ MongoDB Integration – Efficient data storage
-✅ User Profile – View and edit profile after login
-✅ Post Thoughts – Share thoughts on the platform
+- User Authentication – Secure login and registration
+- Password Hashing – Uses bcrypt for security
+- JWT Session Management – Secure user sessions
+- MongoDB Integration – Efficient data storage
+- User Profile – View and edit profile after login
+- Post Thoughts – Share thoughts on the platform
 
 # Tech Stack
 - Backend: Node.js, Express.js
