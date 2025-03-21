@@ -4,9 +4,8 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const userModel = require("../backendProject/models/user");
-const user = require('../models/user')
-const postModel = require("../backendProject/models/post");
+const userModel = require("./models/user");
+const postModel = require("./models/post");
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
