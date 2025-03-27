@@ -46,6 +46,9 @@
                             <a class="text-zinc-500 hover:text-white transition" href="/edit/<%= post._id %>">
                                 Edit
                             </a>
+                            <form action="/delete/<%= post._id %>" method="post" class="inline">
+                                <button type="submit" class="text-red-500 hover:text-red-700 transition">Delete</button>
+                             </form>
                         </div>
                     </div>
                 <% }) %>
