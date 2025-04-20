@@ -1,60 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+  <head>
     <script src="https://cdn.tailwindcss.com"></script>
-</head>
-<body class="bg-zinc-900 text-white">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+      body { font-family: 'Inter', sans-serif; }
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-white text-black min-h-screen">
 
-    <div class="max-w-3xl mx-auto min-h-screen p-6">
-        <!-- Logout Button -->
-        <div class="flex justify-end">
-            <a href="/logout" class="bg-red-500 hover:bg-red-600 transition rounded-md px-4 py-2 text-sm font-medium">
-                Logout
-            </a>
-        </div>
-
-        <!-- Welcome Message -->
-        <h3 class="text-4xl font-semibold mb-4">Hello, <span class="font-light"><%= user.name %></span></h3>
-        <h5 class="text-lg text-zinc-400 mb-6">You can create a new post</h5>
-
-        <!-- Post Form -->
-        <form action="/post" method="post" class="space-y-4">
-            <textarea placeholder="What's on your mind?" name="content"
-                class="w-full p-3 bg-transparent border border-zinc-700 rounded-md focus:border-blue-500 outline-none transition"></textarea>
-            <input type="submit" value="Create Post"
-                class="w-full py-2 text-sm font-medium bg-blue-500 hover:bg-blue-600 transition rounded-md cursor-pointer">
-        </form>
-
-        <!-- Posts Section -->
-        <div class="mt-16">
-            <h3 class="text-zinc-500 text-lg font-medium">Your Posts</h3>
-            <div class="mt-6 space-y-6">
-                <% user.posts.reverse().forEach(function(post){ %>
-                    <div class="p-5 bg-zinc-800 border border-zinc-700 rounded-lg shadow-md">
-                        <h4 class="text-blue-400 font-medium mb-1">@<%= user.username %></h4>
-                        <p class="text-sm text-zinc-300 leading-relaxed"><%= post.content %></p>
-                        <small class="block mt-3 text-sm text-zinc-400"><%= post.likes.length %> likes</small>
-
-                        <!-- Action Buttons -->
-                        <div class="flex gap-5 mt-3 text-sm font-medium">
-                            <a class="text-blue-400 hover:underline transition" href="/like/<%= post._id %>">
-                                <%= post.likes.indexOf(user._id) === -1 ? "Like" : "Unlike" %>
-                            </a>
-                            <a class="text-zinc-500 hover:text-white transition" href="/edit/<%= post._id %>">
-                                Edit
-                            </a>
-                            <form action="/delete/<%= post._id %>" method="post" class="inline">
-                                <button type="submit" class="text-red-500 hover:text-red-700 transition">Delete</button>
-                             </form>
-                        </div>
-                    </div>
-                <% }) %>
+    <!-- Navbar -->
+    <nav class="fixed top-0 left-0 w-full bg-white shadow z-20 py-3 px-6 flex items-center justify-between">
+      <span class="text-xl font-bold tracking-tight text-blue-700">PostSphere</span>
+      <div class="flex items-center gap-4">
+        <a href="/posts" class="text-blue-700 font-semibold hover:underline">Posts</a>
+        <a href="/profile" class="text-blue-700 font-semibold hover:underline">Profile</a>
+        <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition shadow">Logout</a>
+      </div>
+    </nav>
+    <div class="pt-20"></div>
+    <div class="max-w-3xl mx-auto min-h-screen p-4 sm:p-8">
+      <!-- Profile Header with Photo on Left -->
+      <div class="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6 mb-6">
+        <form id="photoForm" action="/profile/photo" method="POST" enctype="multipart/form-data" class="relative group flex-shrink-0">
+          <label for="profilePhotoInput" class="cursor-pointer">
+            <% if (user.profilePhoto) { %>
+              <img src="<%= user.profilePhoto %>" alt="Profile Photo" class="w-24 h-24 sm:w-28 sm:h-28 rounded-full object-cover border-2 border-blue-500 transition duration-200 group-hover:opacity-70" />
+            <% } else { %>
+              <div class="w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-gray-300 flex items-center justify-center text-2xl text-gray-600 border-2 border-gray-200 transition duration-200 group-hover:opacity-70">
+                <span><%= user.name[0] %></span>
+              </div>
+            <% } %>
+            <div class="absolute inset-0 bg-black bg-opacity-40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-200">
+              <span class="text-white text-xs font-semibold">Change Photo</span>
             </div>
+          </label>
+          <input id="profilePhotoInput" type="file" name="profilePhoto" accept="image/*" class="hidden" onchange="document.getElementById('photoForm').submit()" />
+        </form>
+        <div class="w-full text-center sm:text-left">
+          <h3 class="text-3xl sm:text-4xl font-bold mb-2">
+            Hello, <span class="font-normal"><%= user.name %></span>
+          </h3>
+          <p class="text-base text-gray-500">You can create a new post</p>
         </div>
-    </div>
+      </div>
 
-</body>
+
+
+      <!-- Profile Update Form -->
+      <form action="/profile/update" method="post" class="space-y-4 max-w-md mx-auto mt-8">
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Name</label>
+          <input type="text" name="name" value="<%= user.name %>" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-1">Age</label>
+          <input type="number" name="age" value="<%= user.age %>" required class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <button type="submit" class="w-full py-3 bg-blue-700 text-white font-semibold rounded-lg hover:bg-blue-800 transition">Update Profile</button>
+      </form>
+
+    </div>
+  </body>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <% if (typeof message !== 'undefined' && message) { %>
+    <script>
+      Toastify({
+        text: "<%= message %>",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4f46e5"
+      }).showToast();
+    </script>
+  <% } %>
 </html>

@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 mongoose
   .connect(
-    "mongodb+srv://abhijeetkhokhar01:lp52xSX5IEY9Uw2u@cluster0.x3xunis.mongodb.net/miniProject"
+    process.env.MONGO_URI
   )
   .then(() => {
     console.log("MongoDB connected");
@@ -17,7 +17,11 @@ const userSchema = mongoose.Schema({
   age: Number,
   email: String,
   password: String,
+  profilePhoto: { type: String, default: '' },
   posts: [{ type: mongoose.Schema.Types.ObjectId, ref: "post" }],
+  resetToken: String,
+  resetTokenExpiry: Date,
 });
+
 
 module.exports = mongoose.model("user", userSchema);

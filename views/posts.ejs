@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Your Posts</title>
+</head>
+<body class="bg-gray-100 min-h-screen text-gray-900">
+  <!-- Navbar -->
+  <nav class="fixed top-0 left-0 w-full bg-white shadow z-20 py-3 px-6 flex items-center justify-between">
+    <span class="text-xl font-bold tracking-tight text-blue-700">PostSphere</span>
+    <div class="flex items-center gap-6">
+      <a href="/posts" class="text-blue-700 font-semibold">Posts</a>
+      <a href="/profile" class="text-blue-700 font-semibold">Profile</a>
+      <a href="/logout" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition shadow">Logout</a>
+    </div>
+  </nav>
+  <div class="pt-20"></div>
+  <div class="max-w-3xl mx-auto p-4">
+    <h2 class="text-3xl font-bold mb-6 text-center">Your Posts</h2>
+    <!-- Post Creation Form -->
+    <form action="/posts" method="post" class="mb-8 space-y-4">
+      <textarea name="content" placeholder="What's on your mind?" required class="w-full p-4 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-500 focus:outline-none resize-none min-h-[100px]"></textarea>
+      <input type="submit" value="Create Post" class="w-full py-3 text-base font-semibold bg-blue-700 text-white hover:bg-blue-800 rounded-xl transition cursor-pointer shadow-lg mt-2" />
+    </form>
+    <!-- Posts List -->
+    <% if (posts && posts.length > 0) { %>
+      <% posts.reverse().forEach(function(post) { %>
+        <div class="p-4 border rounded mb-4 bg-white">
+          <h4 class="text-blue-600 font-semibold mb-2">@<%= user.username %></h4>
+          <p class="text-gray-700 text-sm leading-relaxed"><%= post.content %></p>
+          <div class="mt-4 text-sm text-gray-500 flex items-center justify-between">
+            <span><%= post.likes.length %> likes</span>
+            <div class="flex items-center gap-4">
+              <a href="/like/<%= post._id %>" class="text-blue-600 hover:underline">Like/Unlike</a>
+              <a href="/edit/<%= post._id %>" class="text-gray-500 hover:text-black transition">Edit</a>
+              <form action="/delete/<%= post._id %>" method="post" class="inline">
+                <button type="submit" class="text-red-500 hover:text-red-700 transition">Delete</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p class="text-center text-gray-500">No posts yet.</p>
+    <% } %>
+  </div>
+</body>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <% if (typeof message !== 'undefined' && message) { %>
+    <script>
+      Toastify({
+        text: "<%= message %>",
+        duration: 4000,
+        gravity: "top",
+        position: "right",
+        backgroundColor: "#4f46e5"
+      }).showToast();
+    </script>
+  <% } %>
+</html>
